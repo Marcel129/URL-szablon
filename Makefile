@@ -12,13 +12,13 @@ ${TRGDIR}/URL_szablon: ${OBJ} ${OBJ}/main.o ${OBJ}/LZespolona.o ${OBJ}/Wektor.o
 ${OBJ}:
 	mkdir ${OBJ}
 
-${OBJ}/main.o: src/main.cpp inc/LZespolona.hh inc/Wektor.hh
+${OBJ}/main.o: src/main.cpp inc/LZespolona.hh src/Wektor.cpp
 	g++ -c ${CPPFLAGS} -o ${OBJ}/main.o src/main.cpp
 
 ${OBJ}/LZespolona.o: src/LZespolona.cpp inc/LZespolona.hh
 	g++ -c ${CPPFLAGS} -o ${OBJ}/LZespolona.o src/LZespolona.cpp
 
-${OBJ}/Wektor.o: src/Wektor.cpp inc/Wektor.hh inc/rozmiar.h
+${OBJ}/Wektor.o: src/Wektor.cpp src/Wektor.cpp inc/rozmiar.h
 	g++ ${CPPFLAGS} -o ${OBJ}/Wektor.o src/Wektor.cpp
 
 

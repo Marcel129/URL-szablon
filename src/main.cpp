@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Wektor.hh"
+#include "Wektor.cpp"
 #include "LZespolona.hh"
 using namespace std;
 #define ROZMIAR 3
@@ -7,7 +7,7 @@ using namespace std;
 
 int main(void)
 {
-    Wektor<LZespolona,3> wek1,wek2;
+    Wektor<LZespolona,ROZMIAR> wek1,wek2;
     cout<<"Test szablonu wektora z zadanym typem LZespolona:"<<endl;
     cin>>wek1>>wek2;
     cout<<"Wektor 1: "<<wek1<<"Wektor 2: "<<wek2

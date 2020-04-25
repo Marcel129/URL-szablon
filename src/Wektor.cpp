@@ -2,13 +2,11 @@
 #ifndef WEKTOR_HH
 #define WEKTOR_HH
 
-//#define ROZMIAR 3
-#define MIEJSCE 4
-#define PRECYZJA 4
 #include <iostream>
 #include <fstream>
 #include <iomanip>
 #include <cmath>
+#include "rozmiar.h"
 using namespace std;
 template <typename TYP, int ROZMIAR>
 class Wektor
