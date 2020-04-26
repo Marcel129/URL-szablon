@@ -29,12 +29,14 @@ public:
   void set_im(double i){this->im=i;};
   const double get_re()const{return this->re;}
   const double get_im()const{return this->im;}
+
   LZespolona operator+(const LZespolona &Skl2) const;
   LZespolona operator-(const LZespolona &Skl2) const;
   LZespolona operator*(const LZespolona &Skl2) const;
   LZespolona operator/(const LZespolona &Skl2) const;
-  LZespolona operator/(const float Skl2) const;
-  
+  LZespolona operator*(const double &Skl2) const;
+  LZespolona operator/(const double &Skl2) const;
+
   LZespolona sprzezenie()const; //funkcja obliczjaca sprzezenie liczby zes
   double modul()const;       //funkcja obliczjaca modul liczby zes
   bool operator!=(const double)const; //operator porównania liczby zespolonej z liczbą rzeczywistą

@@ -124,7 +124,7 @@ LZespolona LZespolona::operator/(const LZespolona &Skl2) const //dzielenie liczb
   exit(1);
 }
 
-LZespolona LZespolona::operator/(const float Skl2) const //dzielenie liczby zespolonej przez liczb rzeczywista
+LZespolona LZespolona::operator/(const double &Skl2) const //dzielenie liczby zespolonej przez liczb rzeczywista
 {
   LZespolona Wynik;
 
@@ -140,7 +140,17 @@ LZespolona LZespolona::operator/(const float Skl2) const //dzielenie liczby zesp
   return Wynik;
 }
 
-bool LZespolona::operator!=(double odniesienie) const
+LZespolona LZespolona::operator*(const double &Skl2) const //mnożenie liczby zespolonej przez liczb rzeczywista
+{
+  LZespolona Wynik;
+
+  Wynik.re = this->re * Skl2;
+  Wynik.im = this->im * Skl2;
+
+  return Wynik;
+}
+
+bool LZespolona::operator!=(const double odniesienie) const
 {
   double modulLiczby = this->modul();
   if (modulLiczby != odniesienie)
