@@ -59,3 +59,9 @@ double UkladRownanLiniowych<TYP, ROZMIAR>::Blad() const
 {
     return (M * R - W).dlugosc();
 }
+
+template <typename TYP, int ROZMIAR>
+Wektor<TYP, ROZMIAR> UkladRownanLiniowych<TYP, ROZMIAR>::wektor_bledu() const
+{
+    return (M * R - W);
+}

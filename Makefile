@@ -2,8 +2,8 @@ TRGDIR=./
 OBJ=./obj
 CPPFLAGS= -c -g -Iinc -Wall -pedantic -std=c++17
 
-__start__: ${TRGDIR}/URL_szablon
-	${TRGDIR}/URL_szablon
+#__start__: ${TRGDIR}/URL_szablon
+#	${TRGDIR}/URL_szablon r
 
 ${TRGDIR}/URL_szablon: ${OBJ} ${OBJ}/main.o ${OBJ}/LZespolona.o ${OBJ}/def_szab.o
 	g++ -o ${TRGDIR}/URL_szablon ${OBJ}/main.o ${OBJ}/LZespolona.o ${OBJ}/def_szab.o

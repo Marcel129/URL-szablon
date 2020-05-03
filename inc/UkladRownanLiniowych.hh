@@ -9,9 +9,9 @@
 template <typename TYP, int ROZMIAR>
 class UkladRownanLiniowych
 {
-  Wektor<TYP, ROZMIAR> W;                //wektor wyrazów wolnych
-  Macierz<TYP, ROZMIAR> M;               //macierz współczynników
-  Wektor<TYP, ROZMIAR> R;                //wektor rozwiązań układu
+  Wektor<TYP, ROZMIAR> W;  //wektor wyrazów wolnych
+  Macierz<TYP, ROZMIAR> M; //macierz współczynników
+  Wektor<TYP, ROZMIAR> R;  //wektor rozwiązań układu
 
 public:
   UkladRownanLiniowych(){};
@@ -32,6 +32,7 @@ public:
 
   void Oblicz();
   double Blad() const;
+  Wektor<TYP, ROZMIAR> wektor_bledu() const;
 };
 
 template <typename TYP, int ROZMIAR>

@@ -79,16 +79,16 @@ Wektor<TYP, ROZMIAR> Wektor<TYP, ROZMIAR>::operator*(const TYP &mnoznik) const /
 template <typename TYP, int ROZMIAR>
 Wektor<TYP, ROZMIAR> Wektor<TYP, ROZMIAR>::operator*(const Wektor<TYP, ROZMIAR> &W) const //iloczyn wektorowy
 {
-  if (ROZMIAR !=3)
+  if (ROZMIAR != 3)
   {
     std::cout << "Błąd: nie można obliczyć iloczynu wektorowego." << std::endl;
     exit(1);
   }
-  
-  Wektor<TYP, 3> wynik;
-  for (int i = 0; i < 3; ++i){
-    wynik[i]=tablica[(i+2)%3]*W[(i+1)%3]-tablica[(i+1)%3]*W[(i+2)%3];
-  }
+
+  Wektor<TYP, ROZMIAR> wynik;
+  for (int i = 0; i < 3; ++i)//oblicz elementy wektora błędu używając Sarrusa
+    wynik[i] = tablica[(i + 2) % 3] * W[(i + 1) % 3] - tablica[(i + 1) % 3] * W[(i + 2) % 3];
+
   return wynik;
 }
 
@@ -123,8 +123,8 @@ Wektor<TYP, ROZMIAR> Wektor<TYP, ROZMIAR>::operator+(const Wektor &W2) const //d
 template <typename TYP, int ROZMIAR>
 TYP Wektor<TYP, ROZMIAR>::iloczyn_skalarny(const Wektor &W) const
 {
-  TYP wynik (0);
-  for (int i=0;i<ROZMIAR;++i)
+  TYP wynik(0);
+  for (int i = 0; i < ROZMIAR; ++i)
   {
     wynik = wynik + tablica[i] * W[i];
   }

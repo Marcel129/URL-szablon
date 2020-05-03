@@ -4,6 +4,6 @@
 
 #define PRECYZJA 3 //precyzja wyświetlania elementów
 #define MIEJSCE 6//ilosc znaków przypadających na liczbe przy wyświetlaniu układu równań
-#define ROZ 3
+#define ROZ 5
 
 #endif
