@@ -1,23 +1,20 @@
 #include <iostream>
-#include "Wektor.cpp"
+#include "Wektor.hh"
+#include "Macierz.hh"
 #include "LZespolona.hh"
+#include "UkladRownanLiniowych.hh"
+#include "rozmiar.h"
 using namespace std;
-#define ROZMIAR 3
 
-
-int main(void)
+int main()
 {
-    Wektor<LZespolona,ROZMIAR> wek1,wek2;
-    cout<<"Test szablonu wektora z zadanym typem LZespolona:"<<endl;
-    cin>>wek1>>wek2;
-    cout<<"Wektor 1: "<<wek1<<"Wektor 2: "<<wek2
-    <<"Podwojony pierwszy wektor: "<<wek1*2
-    <<"Suma wektorów: "<<wek1+wek2<<"Różnica wektorów: "<<wek1-wek2<<"Moduł trzeciego elementu pierwszego wektora: "<<wek1[2].modul()
-    <<endl<<"Sprzezenie drugiego elementu drugiego wektora: "<<wek2[1].sprzezenie()<<endl<<endl;
+     UkladRownanLiniowych<LZespolona, ROZ> U;
+     UkladRownanLiniowych<double, ROZ> U2;
 
-    Wektor<double,ROZMIAR> wek3,wek4;
-    cout<<"Test szablonu wektora z zadanym typem double:"<<endl;
-    cin>>wek3>>wek4;
-    cout<<"Wektor 1: "<<wek3<<"Wektor 2: "<<wek4<<"Podwojony pierwszy wektor: "<<wek3*2
-    <<"Suma wektorów: "<<wek3+wek4<<"Różnica wektorów: "<<wek3-wek4<<endl;
+     cout << "Test szablonu dla macierzy: " << endl;
+     cin >> U;
+     cin >> U2;
+     U.Oblicz();
+     U2.Oblicz();
+     cout << U <<"Błąd obliczeń wynosi: "<<U.Blad()<<endl<< U2<<"Błąd obliczeń wynosi: "<<U2.Blad()<<endl;
 }

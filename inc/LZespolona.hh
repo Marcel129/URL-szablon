@@ -25,6 +25,11 @@ public:
     re = r;
     im = i;
   };
+  explicit LZespolona(double r)
+  {
+    re = r;
+    im = 0;
+  };
   void set_re(double r){this->re=r;};
   void set_im(double i){this->im=i;};
   const double get_re()const{return this->re;}
@@ -36,6 +41,7 @@ public:
   LZespolona operator/(const LZespolona &Skl2) const;
   LZespolona operator*(const double &Skl2) const;
   LZespolona operator/(const double &Skl2) const;
+  void operator=(const double &liczba){this->re=liczba;this->im=0;};
 
   LZespolona sprzezenie()const; //funkcja obliczjaca sprzezenie liczby zes
   double modul()const;       //funkcja obliczjaca modul liczby zes
@@ -43,9 +49,6 @@ public:
 
 };
 
-/*
- * Dalej powinny pojawic sie zapowiedzi definicji przeciazen operatorow
- */
 istream &operator>>(istream &strWej, LZespolona &wyr);       //przeciążenie operatora >> dla liczby zespolonej
 ostream &operator<<(ostream &strWyj, const LZespolona &wyr); //przeciążenie operatora << dla liczby zespolonej
 

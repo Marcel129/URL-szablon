@@ -78,6 +78,7 @@ ostream &operator<<(ostream &strWyj, const LZespolona &wyr)
   return strWyj;
 }
 
+
 LZespolona LZespolona::operator+(const LZespolona &Skl2) const
 {
   LZespolona Wynik;

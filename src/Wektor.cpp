@@ -1,47 +1,16 @@
-
-#ifndef WEKTOR_HH
-#define WEKTOR_HH
-
-#include <iostream>
-#include <fstream>
-#include <iomanip>
-#include <cmath>
-#include "rozmiar.h"
-using namespace std;
-template <typename TYP, int ROZMIAR>
-class Wektor
-{
-  TYP tablica[ROZMIAR];
-
-public:
-  Wektor(){};
-  Wektor(TYP moja_tab[])
-  {
-    for (int i = 0; i < ROZMIAR; i++)
-      tablica[i] = moja_tab[i];
-  }
-
-  const TYP &operator[](int ind) const; //get
-  TYP &operator[](int ind);             //set
-
-  Wektor operator*(const double mnoznik) const;  //mnozenie wektora przez liczbe
-  Wektor operator/(const double dzielnik) const; //dzielenie wektora przez liczbe
-  Wektor operator+(const Wektor &W2) const;      //dodawanie dwoch wektorow
-  Wektor operator-(const Wektor &W2) const;      //odejmowanie dwoch wektorow
-};
-
-
-
+#include "Wektor.hh"
+//ROZMIAR nie jest z #define
 
 template <typename TYP, int ROZMIAR>
-std::istream &operator>>(std::istream &strWej, Wektor<TYP,ROZMIAR> &W)
+std::istream &operator>>(std::istream &strWej, Wektor<TYP, ROZMIAR> &W)
 {
   for (int i = 0; i < ROZMIAR; i++)
     strWej >> W[i];
   return strWej;
 }
+
 template <typename TYP, int ROZMIAR>
-std::ostream &operator<<(std::ostream &strWyj, const Wektor<TYP,ROZMIAR> &W)
+std::ostream &operator<<(std::ostream &strWyj, const Wektor<TYP, ROZMIAR> &W)
 {
   for (int i = 0; i < ROZMIAR; i++)
   {
@@ -49,45 +18,84 @@ std::ostream &operator<<(std::ostream &strWyj, const Wektor<TYP,ROZMIAR> &W)
     if (i + 1 < ROZMIAR)
       strWyj << "\t";
   }
-  std::cout << std::endl;
   return strWyj;
 }
+
+template <typename TYP, int ROZMIAR>
+Wektor<TYP, ROZMIAR>::Wektor() //konstruktor bezparametryczny
+{
+  int i = 0;
+  for (TYP &tab : tablica)
+  {
+    tab = 0;
+    ++i;
+  }
+}
+
+template <typename TYP, int ROZMIAR>
+Wektor<TYP, ROZMIAR>::Wektor(TYP moja_tab[]) //konstruktor parametryczny
+{
+  int i = 0;
+  for (TYP &tab : tablica)
+  {
+    tab = moja_tab[i];
+    ++i;
+  }
+}
+
 template <typename TYP, int ROZMIAR>
 const TYP &Wektor<TYP, ROZMIAR>::operator[](int ind) const //get
 {
   if (ind < 0 || ind > ROZMIAR)
   {
-    std::cout << ind << std::endl;
     std::cerr << "Przekroczenie zakresu" << std::endl;
     exit(1);
   }
   return tablica[ind];
 }
+
 template <typename TYP, int ROZMIAR>
 TYP &Wektor<TYP, ROZMIAR>::operator[](int ind) //set
 {
   if (ind < 0 || ind > ROZMIAR)
   {
-    std::cout << ind << std::endl;
     std::cerr << "Przekroczenie zakresu" << std::endl;
     exit(1);
   }
   return tablica[ind];
 }
+
 template <typename TYP, int ROZMIAR>
-Wektor<TYP, ROZMIAR> Wektor<TYP, ROZMIAR>::operator*(const double mnoznik) const //mnozenie wektora przez liczbe
+Wektor<TYP, ROZMIAR> Wektor<TYP, ROZMIAR>::operator*(const TYP &mnoznik) const //mnozenie wektora przez liczbe
 {
-  Wektor W;
+  Wektor<TYP, ROZMIAR> W;
 
   for (int i = 0; i < ROZMIAR; ++i)
-    W.tablica[i] = this->tablica[i] * mnoznik;
+    W.tablica[i] = mnoznik * this->tablica[i];
 
   return W;
 }
+
 template <typename TYP, int ROZMIAR>
-Wektor<TYP, ROZMIAR> Wektor<TYP, ROZMIAR>::operator/(const double dzielnik) const //dzielenie wektora przez liczbe
+Wektor<TYP, ROZMIAR> Wektor<TYP, ROZMIAR>::operator*(const Wektor<TYP, ROZMIAR> &W) const //iloczyn wektorowy
 {
-  Wektor W;
+  if (ROZMIAR !=3)
+  {
+    std::cout << "Błąd: nie można obliczyć iloczynu wektorowego." << std::endl;
+    exit(1);
+  }
+  
+  Wektor<TYP, 3> wynik;
+  for (int i = 0; i < 3; ++i){
+    wynik[i]=tablica[(i+2)%3]*W[(i+1)%3]-tablica[(i+1)%3]*W[(i+2)%3];
+  }
+  return wynik;
+}
+
+template <typename TYP, int ROZMIAR>
+Wektor<TYP, ROZMIAR> Wektor<TYP, ROZMIAR>::operator/(const TYP &dzielnik) const //dzielenie wektora przez liczbe
+{
+  Wektor<TYP, ROZMIAR> W;
   if (dzielnik != 0)
   {
     for (int i = 0; i < ROZMIAR; ++i)
@@ -100,34 +108,35 @@ Wektor<TYP, ROZMIAR> Wektor<TYP, ROZMIAR>::operator/(const double dzielnik) cons
   }
   return W;
 }
+
 template <typename TYP, int ROZMIAR>
 Wektor<TYP, ROZMIAR> Wektor<TYP, ROZMIAR>::operator+(const Wektor &W2) const //dodawanie dwoch wektorow
 {
-  Wektor W;
+  Wektor<TYP, ROZMIAR> W;
 
   for (int i = 0; i < ROZMIAR; ++i)
     W.tablica[i] = this->tablica[i] + W2.tablica[i];
 
   return W;
 }
+
+template <typename TYP, int ROZMIAR>
+TYP Wektor<TYP, ROZMIAR>::iloczyn_skalarny(const Wektor &W) const
+{
+  TYP wynik (0);
+  for (int i=0;i<ROZMIAR;++i)
+  {
+    wynik = wynik + tablica[i] * W[i];
+  }
+  return wynik;
+}
+
 template <typename TYP, int ROZMIAR>
 Wektor<TYP, ROZMIAR> Wektor<TYP, ROZMIAR>::operator-(const Wektor &W2) const //odejmowanie dwoch wektorow
 {
-  Wektor W;
+  Wektor<TYP, ROZMIAR> W;
   for (int i = 0; i < ROZMIAR; ++i)
     W.tablica[i] = this->tablica[i] - W2.tablica[i];
 
   return W;
 }
-
-/*
-double dlugosc_wektora(const Wektor W)
-{
-    double dl = 0;
-    for (int a = 0; a < ROZMIAR; ++a)
-        dl += W[a] * W[a];
-    dl = sqrt(dl);
-    return dl;
-}*/
-
-#endif
